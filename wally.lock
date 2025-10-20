@@ -5,9 +5,14 @@ registry = "test"
 [[package]]
 name = "judash399/studio-controls"
 version = "0.1.0"
-dependencies = [["fusion", "realdeedy/fusion@0.3.0"]]
+dependencies = [["fusion", "realdeedy/fusion@0.3.0"], ["pluginessentials", "tenebrisnoctua/pluginessentials@1.5.0"]]
 
 [[package]]
 name = "realdeedy/fusion"
 version = "0.3.0"
+dependencies = []
+
+[[package]]
+name = "tenebrisnoctua/pluginessentials"
+version = "1.5.0"
 dependencies = []
