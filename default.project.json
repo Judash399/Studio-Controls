@@ -3,9 +3,6 @@
   "servePlaceIds": [],
   "tree": {
     "$className": "Folder",
-    "StudioControls": {
-      "$className": "Plugin",
-      "$path": "src"
-    }
+    "$path": "src"
   }
 }
