@@ -3,6 +3,11 @@
   "servePlaceIds": [],
   "tree": {
     "$className": "Folder",
-    "$path": "src"
+
+      "$path": "src",
+
+      "Packages": {
+        "$path": "Packages"
+      }
   }
 }
