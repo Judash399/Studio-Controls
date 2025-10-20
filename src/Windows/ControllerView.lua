@@ -15,7 +15,9 @@ function module.Init(props: {
     scope: Fusion.Scope<any>,
     toolbar: PluginToolbar
 })
-    local scope = props.scope:deriveScope()
+    local scope = props.scope:deriveScope({
+        New = Fusion.New
+    })
 
     --Commponents
     local Widget = require(PluginEssentials.PluginComponents.Widget)(scope)
@@ -23,6 +25,7 @@ function module.Init(props: {
 	local Button = require(PluginEssentials.StudioComponents.Button)(scope)
 	local IconButton = require(PluginEssentials.StudioComponents.IconButton)(scope)
 	local TextInput = require(PluginEssentials.StudioComponents.TextInput)(scope)
+    local Menu = CustomComponents.Menu(scope)
 	local ControllerListItem = CustomComponents.ControllerListItem(scope)
 
     local widgetEnabled = scope:Value(false)
@@ -58,9 +61,58 @@ function module.Init(props: {
 		[OnChange "Enabled"] = function(isEnabled)
 			widgetEnabled:set(isEnabled)
 		end,
+
+        [Children] = {
+        }
 	}
 
+    local ControllerMenu = Menu {
+        Parent = controllersWidget,
+        TopbarContent = {
+            IconButton {
+                Icon = "rbxassetid://10734950309",
+                Enabled = true,
+                Name = "Settings",
 
+                Activated = function()
+                    print("Activated!")
+                end,
+
+                [Children] = {
+                    scope:New "UIAspectRatioConstraint" {
+
+                    }
+                }
+			},
+					
+			TextInput {
+                PlaceholderText = "Search For a controller.",
+                Enabled = true,
+
+                OnChange = function(newText)
+                    print("new text: ", newText)
+                end,
+                
+                [Children] = {
+                    scope:New "UIFlexItem" {
+                        FlexMode = Enum.UIFlexMode.Fill
+                    }
+                }
+			},
+        },
+        Content = {
+            Button {
+                Text = "Hello!",
+                TextSize = 24,
+                Size = UDim2.new(0, 200, 0, 50),
+                Enabled = true,
+
+                Activated = function()
+                    print("Activated!")
+                end
+            }
+        }
+    }
 
     return scope
 end
