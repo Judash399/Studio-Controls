@@ -65,6 +65,7 @@ function components.Menu(scope: Fusion.Scope<any>)
 			Name = "Content",
 			Size = UDim2.new(1, 0, 1, 0),
 			LayoutOrder = 2,
+            Parent = props.Parent,
 
             [Children] = {
                 props.Content,

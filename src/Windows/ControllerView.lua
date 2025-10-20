@@ -101,6 +101,12 @@ function module.Init(props: {
 			},
         },
         Content = {
+            scope:New "UIListLayout" {
+                FillDirection = Enum.FillDirection.Vertical,
+                Padding = UDim.new(0, 5),
+                SortOrder = Enum.SortOrder.LayoutOrder,
+            },
+
             Button {
                 Text = "Hello!",
                 TextSize = 24,
