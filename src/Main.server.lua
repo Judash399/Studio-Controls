@@ -7,9 +7,39 @@ end
 
 --Modules
 local Packages = script.Parent.Packages
+local Fusion = require(Packages.fusion)
+local PluginEssentials = require(Packages.pluginessentials)
 
---@type Fusion
-local Fusion = require(Packages.Fusion)
+PluginEssentials.setFusion(Fusion)
 
---@type PluginEssentials
-local PluginEssentials = require(Packages.PluginEssentials)
+local RootScope = Fusion.scoped({
+	doCleanup = Fusion.doCleanup,
+	Hydrate = Fusion.Hydrate,
+	deriveScope = Fusion.deriveScope,
+    Value = Fusion.Value,
+    Computed = Fusion.Computed,
+})
+
+--Components
+local ToolbarComponent = require(PluginEssentials.PluginComponents.Toolbar)(RootScope)
+
+--Refrences
+local RootFolder = script.Parent
+
+local newToolbar = ToolbarComponent {
+    Name = "Studio Controls",
+}
+
+--Windows
+local ControllerView = require(RootFolder.Windows.ControllerView)
+
+
+ControllerView.Init {
+    scope = RootScope,
+    toolbar = newToolbar
+}
+
+
+plugin.Unloading:Once(function()
+    Fusion.doCleanup(RootScope)
+end)
