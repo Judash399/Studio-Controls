@@ -1,17 +1,15 @@
-# Welcome to MkDocs
+---
+hide:
+  - toc
+  - navigation
+---
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+# Make the Most Out of Your Studio. 
+Studio Controls is a simple and elegant gizmo editor for roblox.
 
-## Commands
+Lets you build controls that are simple to setup yet advanced. Studio Contols is what **you** want it to be, letting you focus on creating, not building tools to create.
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+If that sparked your intrest get started below!
 
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+[Get Started](Intro%20Tutorials/Downloading.md){ .md-button .md-button--primary }
+[Advanced Tutorials](Intro%20Tutorials/Downloading.md){ .md-button}
