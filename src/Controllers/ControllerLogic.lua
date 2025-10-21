@@ -21,7 +21,7 @@ function module.StartController(props: {
         return
     end
 
-    local ControllerTypes = scope:ForPairs(function(use, InnerScope, _, instance)
+    local ControllerTypes = scope:ForPairs(ControllerTypeFolder:GetChildren(), function(use, InnerScope, _, instance)
         local component = require(instance)(scope)
         return instance.Name, component
     end)
