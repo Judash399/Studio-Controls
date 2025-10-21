@@ -32,13 +32,16 @@ local newToolbar = ToolbarComponent {
 
 --Windows
 local ControllerView = require(RootFolder.Windows.ControllerView)
+local SettingsView = require(RootFolder.Windows.SettingsView)
 
+SettingsView.Init {
+    scope = RootScope
+}
 
 ControllerView.Init {
     scope = RootScope,
     toolbar = newToolbar
 }
-
 
 plugin.Unloading:Once(function()
     Fusion.doCleanup(RootScope)

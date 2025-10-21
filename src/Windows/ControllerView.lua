@@ -5,6 +5,8 @@ local Fusion = require(RootFolder.Packages.fusion)
 local PluginEssentials = require(RootFolder.Packages.pluginessentials)
 local CustomComponents = require(RootFolder.Components.CustomComponents)
 
+local SettingsView = require(script.Parent.SettingsView)
+
 --Refrences
 local scoped, peek, OnChange, OnEvent, Children = Fusion.scoped, Fusion.peek, Fusion.OnChange, Fusion.OnEvent, Fusion.Children
 
@@ -75,7 +77,7 @@ function module.Init(props: {
                 Name = "Settings",
 
                 Activated = function()
-                    print("Activated!")
+                    SettingsView.ToggleVisibility()
                 end,
 
                 [Children] = {
@@ -100,21 +102,27 @@ function module.Init(props: {
                 }
 			},
         },
+
         Content = {
             scope:New "UIListLayout" {
                 FillDirection = Enum.FillDirection.Vertical,
                 Padding = UDim.new(0, 5),
                 SortOrder = Enum.SortOrder.LayoutOrder,
             },
+            scope:New "UIPadding" {
+                PaddingLeft = UDim.new(0, 5),
+                PaddingRight = UDim.new(0, 5),
+            },
 
             Button {
-                Text = "Hello!",
+                Text = "New Controller",
                 TextSize = 24,
-                Size = UDim2.new(0, 200, 0, 50),
+                Size = UDim2.new(1, 0, 0, 28),
                 Enabled = true,
+                BackgroundColorStyle = Enum.StudioStyleGuideColor.MainButton,
 
                 Activated = function()
-                    print("Activated!")
+                    --TODO: Make this open the controller setup quiz.
                 end
             }
         }
