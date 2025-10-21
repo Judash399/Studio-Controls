@@ -1,5 +1,6 @@
 --Services
 local RunService = game:GetService("RunService")
+local SelectionService = game:GetService("Selection")
 
 if RunService:IsRunning() then
     return --In a running game, do nothing.
@@ -10,6 +11,8 @@ local Packages = script.Parent.Packages
 local Fusion = require(Packages.fusion)
 local PluginEssentials = require(Packages.pluginessentials)
 local Settings = require(script.Parent.Utils.Settings)
+local ControllerLogic = require(script.Parent.Controllers.ControllerLogic)
+local CreateIfMissing = require(script.Parent.Utils.CreateIfMissing)
 
 PluginEssentials.setFusion(Fusion)
 
@@ -26,6 +29,9 @@ local ToolbarComponent = require(PluginEssentials.PluginComponents.Toolbar)(Root
 
 --Refrences
 local RootFolder = script.Parent
+
+local StudioControlsFolder = CreateIfMissing(game.ServerStorage, "StudioControls", "Folder")
+local ObjectControllerFolder = CreateIfMissing(StudioControlsFolder, "ObjectControllers", "Folder")
 
 local newToolbar = ToolbarComponent {
     Name = "Studio Controls",
@@ -45,6 +51,38 @@ ControllerView.Init {
     scope = RootScope,
     toolbar = newToolbar
 }
+
+local currentlySelected = nil
+
+table.insert(RootScope, SelectionService.SelectionChanged:Connect(function()
+	if currentlySelected then
+		currentlySelected:doCleanup()
+	end
+	currentlySelected = RootScope:deriveScope()
+
+    local selected = SelectionService:Get()
+    if #selected ~= 1 then return end
+    local selection = selected[1]
+
+    local ControllerFolder = nil
+    for _, tagName in selection:GetTags() do
+        local tagLoopFind = ObjectControllerFolder:FindFirstChild(tagName)
+        if tagLoopFind then
+           ControllerFolder =  tagLoopFind
+           break
+        end
+    end
+
+    if not ControllerFolder then
+        return
+    end
+
+    ControllerLogic.StartController {
+        scope =  currentlySelected,
+        controlTree = ControllerFolder,
+        selection = selection
+    }
+end))
 
 plugin.Unloading:Once(function()
     Fusion.doCleanup(RootScope)
