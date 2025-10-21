@@ -9,6 +9,7 @@ end
 local Packages = script.Parent.Packages
 local Fusion = require(Packages.fusion)
 local PluginEssentials = require(Packages.pluginessentials)
+local Settings = require(script.Parent.Utils.Settings)
 
 PluginEssentials.setFusion(Fusion)
 
@@ -29,6 +30,8 @@ local RootFolder = script.Parent
 local newToolbar = ToolbarComponent {
     Name = "Studio Controls",
 }
+
+Settings.ReadSettings(plugin, RootScope)
 
 --Windows
 local ControllerView = require(RootFolder.Windows.ControllerView)

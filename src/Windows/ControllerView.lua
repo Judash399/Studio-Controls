@@ -109,10 +109,6 @@ function module.Init(props: {
                 Padding = UDim.new(0, 5),
                 SortOrder = Enum.SortOrder.LayoutOrder,
             },
-            scope:New "UIPadding" {
-                PaddingLeft = UDim.new(0, 5),
-                PaddingRight = UDim.new(0, 5),
-            },
 
             Button {
                 Text = "New Controller",

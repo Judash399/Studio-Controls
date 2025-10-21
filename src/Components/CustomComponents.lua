@@ -4,7 +4,7 @@ local RootFolder = script.Parent.Parent
 local Fusion = require(RootFolder.Packages.fusion)
 local PluginEssentials = require(RootFolder.Packages.pluginessentials)
 
-local scoped, peek, OnChange, OnEvent, Children, unwrap = Fusion.scoped, Fusion.peek, Fusion.OnChange, Fusion.OnEvent, Fusion.Children, Fusion.unwrap
+local scoped, peek, OnChange, OnEvent, Children, unwrap, out = Fusion.scoped, Fusion.peek, Fusion.OnChange, Fusion.OnEvent, Fusion.Children, Fusion.unwrap, Fusion.out
 
 local components = {}
 
@@ -60,18 +60,31 @@ function components.Menu(scope: Fusion.Scope<any>)
         }
 
         --Content
-        newScope:New "Frame" {
+
+        local themeProvider = require(PluginEssentials.StudioComponents.Util.themeProvider)(scope)
+
+        local BarColor = themeProvider:GetColor(Enum.StudioStyleGuideColor.ScrollBar) or nil
+
+        return newScope:New "ScrollingFrame" {
             BackgroundTransparency = 1,
 			Name = "Content",
 			Size = UDim2.new(1, 0, 1, 0),
 			LayoutOrder = 2,
             Parent = props.Parent,
+            CanvasSize = UDim2.new(0, 0, 0, 0),
+            AutomaticCanvasSize = Enum.AutomaticSize.Y,
+            ScrollBarThickness = 5,
+            ScrollBarImageColor3 = BarColor,
 
             [Children] = {
                 props.Content,
                 newScope:New "UIFlexItem" {
 					FlexMode = Enum.UIFlexMode.Fill
-				}
+				},
+                scope:New "UIPadding" {
+                    PaddingLeft = UDim.new(0, 5),
+                    PaddingRight = UDim.new(0, 7),
+                }
             }
         }
     end
@@ -91,7 +104,9 @@ function components.SideTab(scope: Fusion.Scope<any>)
         local ButtonComponent = require(PluginEssentials.StudioComponents.Button)(scope)
         local LabelComponent = require(PluginEssentials.StudioComponents.Label)(scope)
 
-        return ButtonComponent {
+
+
+        local button = ButtonComponent {
             Text = "",
             Size = UDim2.new(1, 0, 0, 30),
             [Children] = {
@@ -121,6 +136,10 @@ function components.SideTab(scope: Fusion.Scope<any>)
                 }
             }
         }
+
+        button.UICorner.CornerRadius = UDim.new(0, 7)
+
+        return button
     end
 end
 
