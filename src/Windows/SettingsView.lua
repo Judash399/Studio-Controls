@@ -5,6 +5,8 @@ local Fusion = require(RootFolder.Packages.fusion)
 local PluginEssentials = require(RootFolder.Packages.pluginessentials)
 local CustomComponents = require(RootFolder.Components.CustomComponents)
 
+local Settings = require(RootFolder.Utils.Settings)
+
 --Refrences
 local scoped, peek, OnChange, OnEvent, Children = Fusion.scoped, Fusion.peek, Fusion.OnChange, Fusion.OnEvent, Fusion.Children
 

@@ -4,22 +4,19 @@
   text-align: left;
   font-size: 2.6rem;
   margin-bottom: 1rem;
-  color: rgb(255, 255, 255);
 }
 .md-content .landing-paragraph {
   text-align: left;
   font-weight: 600;
   font-size: 1rem;
-   color: rgb(223, 223, 223);
 }
 
 .landing-page-container {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* centers vertically */
-  min-height: 100vh;       /* full viewport height */
-  text-align: center;
+  justify-content: center;
+  text-align: left;
   padding: 0 1rem;
   box-sizing: border-box;
-  gap: .5rem;             /* optional spacing between elements */
+  gap: .5rem;
 }

@@ -4,7 +4,7 @@ local Value, Computed = Fusion.Value, Fusion.Computed
 local settings = {}
 
 local defaultSettings = {
-    
+    ControllerTheme = "Default"
 }
 table.freeze(defaultSettings)
 
@@ -12,17 +12,17 @@ table.freeze(defaultSettings)
 function settings.ReadSettings(plugin: Plugin, scope: Fusion.Scope<any>)
     local savedSettings = plugin:GetSetting("StudioControlsSettings") or {}
 
-    -- Merge defaults
+    -- Merge new defaults into settings.
     for key, value in pairs(defaultSettings) do
         if savedSettings[key] == nil then
             savedSettings[key] = value
         end
     end
 
-    -- Create a single reactive state for all saved settings
+    -- Create a value for settings.
     local savedState = Value(savedSettings)
 
-    -- Create Computed values for each setting key
+    -- Create Computed values for each setting key, so anything that uses it dynamically updates to changes in the settings.
     for key, _ in pairs(defaultSettings) do
         settings[key] = Computed(scope, function(use)
             local current = use(savedState)
@@ -30,13 +30,10 @@ function settings.ReadSettings(plugin: Plugin, scope: Fusion.Scope<any>)
         end)
     end
 
-    -- Store the root state so settings can be changed later
     settings._state = savedState
     settings._plugin = plugin
 
-    
-    --Remove the ReadSettings function to prevent being ran twice.
-    settings.ReadSettings = nil
+    settings.ReadSettings = nil --Remove the ReadSettings function to prevent being ran twice.
 end
 
 -- Updates a setting and persists it
