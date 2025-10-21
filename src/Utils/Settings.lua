@@ -20,7 +20,7 @@ function settings.ReadSettings(plugin: Plugin, scope: Fusion.Scope<any>)
     end
 
     -- Create a value for settings.
-    local savedState = Value(savedSettings)
+    local savedState = Value(scope, savedSettings)
 
     -- Create Computed values for each setting key, so anything that uses it dynamically updates to changes in the settings.
     for key, _ in pairs(defaultSettings) do

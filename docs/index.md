@@ -13,7 +13,7 @@ hide:
     And! Studio Controls is free and open source, meaning it will remain free <em>forever</em>! 
   </p>
   <div>
-    <a href="Fundamentals/Get%20Started/" class="md-button md-button--primary">Get Started now &#8594;</a>
-    <a href="Intro%20Tutorials/Downloading/" class="md-button">Advanced Tutorials</a>
+    <a href="Fundamentals/get-started/" class="md-button md-button--primary">Get Started &#8594;</a>
+    <a href="Advanced/syncing-controllers-across-places.md/" class="md-button">Advanced Tutorials</a>
   </div>
 </div>
