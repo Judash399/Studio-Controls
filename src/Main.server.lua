@@ -52,7 +52,7 @@ table.insert(RootScope, SelectionService.SelectionChanged:Connect(function()
 	if currentlySelected then
 		currentlySelected:doCleanup()
 	end
-	currentlySelected = RootScope:deriveScope()
+	currentlySelected = RootScope:innerScope()
 
     local selected = SelectionService:Get()
     if #selected ~= 1 then return end

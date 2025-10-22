@@ -11,7 +11,7 @@ function module.StartController(props: {
     controlTree: Instance,
     selection: Instance
 })
-    local scope = props.scope:deriveScope({
+    local scope = props.scope:innerScope({
         ForPairs = Fusion.ForPairs
     })
 

@@ -17,7 +17,7 @@ function module.Init(props: {
     scope: Fusion.Scope<any>,
     toolbar: PluginToolbar
 })
-    local scope = props.scope:deriveScope({
+    local scope = props.scope:innerScope({
         New = Fusion.New
     })
 

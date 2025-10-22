@@ -15,7 +15,7 @@ local module = {}
 function  module.Init(props: {
     scope: Fusion.Scope<any>
 })
-    local scope = props.scope:deriveScope()
+    local scope = props.scope:innerScope()
     --Componenets
     local Widget = require(PluginEssentials.PluginComponents.Widget)(scope)
     local SideBarMenu = CustomComponents.SideBarMenu(scope)

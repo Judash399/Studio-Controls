@@ -9,7 +9,7 @@ return function(scope: Fusion.Scope<any>)
         instanceCFrame: CFrame
     })
         -- Create a derived Fusion scope to manage cleanup
-        local scope = scope:deriveScope({
+        local scope = scope:innerScope({
             New = Fusion.New,
             Computed = Fusion.Computed
         })
