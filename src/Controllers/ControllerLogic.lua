@@ -11,7 +11,9 @@ function module.StartController(props: {
     controlTree: Instance,
     selection: Instance
 })
-    local scope = props.scope:deriveScope()
+    local scope = props.scope:deriveScope({
+        ForPairs = Fusion.ForPairs
+    })
 
     --Read from the control tree
     local success, data = UnpackControlTree(props.controlTree)
@@ -26,9 +28,17 @@ function module.StartController(props: {
         return instance.Name, component
     end)
 
+    local selectionCFrame = nil
+	if props.selection:IsA("Model") then
+		selectionCFrame = props.selection.WorldPivot
+	elseif props.selection:IsA("BasePart") then
+		selectionCFrame = props.selection.CFrame
+	else
+		selectionCFrame = CFrame.new(0, 0, 0)
+	end
 
     for i, controller in data.Controllers do
-        local component = ControllerTypes[controller.Type]
+		local component = Fusion.peek(ControllerTypes)[controller.Type]
         
         if not component then
             warn("Type '" .. controller.Type .. "' in Control " .. i .. " in the '" .. props.controlTree.Name .. "' Controller is not a valid control type!")
@@ -38,6 +48,7 @@ function module.StartController(props: {
         component {
             data = controller,
             instance = props.selection,
+            instanceCFrame = selectionCFrame
         }
     end
 end
