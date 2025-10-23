@@ -41,20 +41,27 @@ function module.StartController(props: {
 
     local InfluenceManager = require(script.Parent.ControllerUtils.InfluenceManager)(scope, data.Influences)
 
-    for i, controller in data.Controllers do
-		local component = Fusion.peek(ControllerTypes)[controller.Type]
+
+    for ControlID, control in data.Controllers do
+		local component = Fusion.peek(ControllerTypes)[control.Type]
         
         if not component then
-            warn("Type '" .. controller.Type .. "' in Control " .. i .. " in the '" .. props.controlTree.Name .. "' Controller is not a valid control type!")
+            warn("Type '" .. control.Type .. "' in Control " .. ControlID .. " in the '" .. props.controlTree.Name .. "' Controller is not a valid control type!")
             continue
         end
 
+        for i, influenceOutput in InfluenceManager:GetAllFromObject(control.Type, ControlID) do
+            local keyInfo = InfluenceManager.DesectKey(influenceOutput)
+
+            
+        end
+
         component {
-            data = controller,
+            data = control,
             instance = props.selection,
             instanceCFrame = selectionCFrame,
             InfluenceManager = InfluenceManager,
-            ControlID = i,
+            ControlID = ControlID,
         }
     end
 end
