@@ -25,7 +25,7 @@ function components.Menu(scope: Fusion.Scope<any>)
             Content: any,
         })
         
-        local newScope = scope:deriveScope({
+        local newScope = scope:innerScope({
             New = Fusion.New
         })
         
@@ -96,7 +96,7 @@ function components.SideTab(scope: Fusion.Scope<any>)
         IconID: string,
         Text: string,
     })
-        local scope = scope:deriveScope({
+        local scope = scope:innerScope({
             New = Fusion.New
         })
         
@@ -150,7 +150,7 @@ function components.SideBarMenu(scope: Fusion.Scope<any>)
         Content: any,
         Parent: Instance,
     })
-        local scope = scope:deriveScope({
+        local scope = scope:innerScope({
             New = Fusion.New
         })
 

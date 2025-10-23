@@ -44,6 +44,8 @@ function methods:GetAllFromObject(ObjectType: string, ObjectId: string): {[strin
             matching[i] = influenceOutput
         end
     end
+    
+    return matching
 end
 
 return function(scope: Fusion.Scope<any>, influenceList)

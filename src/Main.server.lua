@@ -16,13 +16,7 @@ local CreateIfMissing = require(script.Parent.Utils.CreateIfMissing)
 
 PluginEssentials.setFusion(Fusion)
 
-local RootScope = Fusion.scoped({
-	doCleanup = Fusion.doCleanup,
-	Hydrate = Fusion.Hydrate,
-	deriveScope = Fusion.deriveScope,
-    Value = Fusion.Value,
-    Computed = Fusion.Computed,
-})
+local RootScope = Fusion.scoped(Fusion)
 
 --Components
 local ToolbarComponent = require(PluginEssentials.PluginComponents.Toolbar)(RootScope)
@@ -58,7 +52,7 @@ table.insert(RootScope, SelectionService.SelectionChanged:Connect(function()
 	if currentlySelected then
 		currentlySelected:doCleanup()
 	end
-	currentlySelected = RootScope:deriveScope()
+	currentlySelected = RootScope:innerScope()
 
     local selected = SelectionService:Get()
     if #selected ~= 1 then return end
