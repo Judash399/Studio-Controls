@@ -1,5 +1,7 @@
-local function compileInstanceTree(root): {any}
-    local t = {}
+local Fusion = require(script.Parent.Parent.Packages.fusion)
+
+local function compileInstanceTree(root, scope): {any}
+    local table = Fusion.scoped()
 
     for _, child in ipairs(root:GetChildren()) do
         local index = child.Name
@@ -10,18 +12,18 @@ local function compileInstanceTree(root): {any}
         end
 
         if child:IsA "ValueBase" then
-            t[index] = child.Value
+            table[index] = Fusion.Value(scope, child.Value)
         elseif child:IsA "Folder" then
-            t[index] = compileInstanceTree(child)
+            table[index] = compileInstanceTree(child, scope)
         else
-            t[index] = child
+            table[index] = child
         end
     end
 
-    return t
+    return table
 end
 
-return function(Root: Folder)
+return function(Root: Folder, scope: Fusion.Scope<any>)
     local ControlsFolder = Root:FindFirstChild("Controls")
 
     if not ControlsFolder then
@@ -52,8 +54,8 @@ return function(Root: Folder)
 
 
     --We would likely do some logic over here to check if the controls and influences are correctly defined, as of right now it just reads the data blindly.
-    local ControllerData = compileInstanceTree(ControlsFolder)
-    local InfluenceData = compileInstanceTree(InfluencesFolder)
+    local ControllerData = compileInstanceTree(ControlsFolder, scope)
+    local InfluenceData = compileInstanceTree(InfluencesFolder, scope)
 
     return true, {
         Controllers = ControllerData,

@@ -1,11 +1,12 @@
 --Modules
 local Fusion = require(script.Parent.Parent.Parent.Packages.fusion)
 
+local peek = Fusion.peek
+
 local Plugin: Plugin = script:FindFirstAncestorWhichIsA("Plugin")
 
 return function(scope: Fusion.Scope<any>)
     return function(props: {
-        StartingPosition: CFrame,
         Adornee: Instance,
         CurrentPosition: Fusion.UsedAs<CFrame>
     })
@@ -19,7 +20,7 @@ return function(scope: Fusion.Scope<any>)
             gridSnap:set(math.round(Plugin.GridSize * 10000) / 10000)
         end))
 
-        local LastPos = props.StartingPosition
+        local LastPos = peek(props.CurrentPosition)
 
         local handles = scope:New "Handles" {
             Parent = game.CoreGui,
@@ -42,7 +43,7 @@ return function(scope: Fusion.Scope<any>)
             end,
 
             [Fusion.OnEvent "MouseButton1Up"] = function(face)
-                LastPos = Fusion.peek(props.CurrentPosition)
+                LastPos = peek(props.CurrentPosition)
             end
         }
 

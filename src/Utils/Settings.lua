@@ -4,7 +4,8 @@ local Value, Computed = Fusion.Value, Fusion.Computed
 local settings = {}
 
 local defaultSettings = {
-    ControllerTheme = "Default"
+    ControllerTheme = "Default",
+    ControlTrans = .3
 }
 table.freeze(defaultSettings)
 
