@@ -3,7 +3,7 @@ local Fusion = require(script.Parent.Parent.Parent.Packages.fusion)
 local methods = {}
 methods.__index = methods
 
-local function CombineKey(ObjectType: string, ObjectId: string, propertyName: string)
+function methods.CombineKey(ObjectType: string, ObjectId: string, propertyName: string)
     local key = nil
     if ObjectId then
         key = ObjectType .. "." .. ObjectId .. "." .. propertyName
@@ -14,7 +14,7 @@ local function CombineKey(ObjectType: string, ObjectId: string, propertyName: st
     return key
 end
 
-local function DesectKey(key): {ObjectType: string, ObjectId: string, propertyName: string}
+function methods.DesectKey(key): {ObjectType: string, ObjectId: string, propertyName: string}
     local table = string.split(key, ".")
 
     if #table == 3 then
@@ -38,7 +38,7 @@ function methods:GetAllFromObject(ObjectType: string, ObjectId: string): {[strin
     local matching = {}
 
     for i, influenceOutput in pairs(self._influenceList) do
-        local keyInfo = DesectKey(i)
+        local keyInfo = self.DesectKey(i)
 
         if keyInfo.ObjectId == ObjectId and keyInfo.ObjectType == ObjectType then
             matching[i] = influenceOutput
