@@ -6,7 +6,9 @@ return function(scope: Fusion.Scope<any>)
     return function(props: {
         data: any,
         instance: Instance,
-        instanceCFrame: CFrame
+        instanceCFrame: CFrame,
+        InfluenceManager: any,
+        ControlID: number,
     })
         -- Create a derived Fusion scope to manage cleanup
         local scope = scope:deriveScope({
@@ -49,6 +51,11 @@ return function(scope: Fusion.Scope<any>)
             Adornee = meshpart,
             CurrentPosition = Position
         }
+
+        --Do all the Config logic. A config is something that can be modifed by the user.
+
+        props.InfluenceManager:LinkToInfluence("Control", props.ControlID, "Position", Position)
+
         return scope
     end
 end
