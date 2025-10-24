@@ -8,6 +8,11 @@ local module = {}
 
 local peek = Fusion.peek
 
+
+local function controlLogic(ControlId: number, controlData: {[string | number]: Fusion.Value<Fusion.Scope<any>, any>})
+    
+end
+
 function module.StartController(props: {
     scope: Fusion.Scope<any>,
     controlTree: Instance,
@@ -48,18 +53,18 @@ function module.StartController(props: {
     for ControlID, control in data.Controllers do
 		local component = peek(ControllerTypes)[peek(control.Type)]
         
-        if not component then
+        if component == nil then
             warn("Type '" .. peek(control.Type) .. "' in Control " .. ControlID .. " in the '" .. props.controlTree.Name .. "' Controller is not a valid control type!")
             continue
         end
 
         local function GetValueFromKey(key: string, defaultvalue: any): any
-            local keyInfo = InfluenceManager.DesectKey(key)
+            local keyInfo = InfluenceManager.DissectKey(key)
 
             if keyInfo.ObjectType == "Attribute" then
 				local value = props.selection:GetAttribute(keyInfo.propertyName)
 				
-				if not value then
+				if value == nil then
 					props.selection:SetAttribute(keyInfo.propertyName, defaultvalue)
 					return defaultvalue
 				end
@@ -72,7 +77,7 @@ function module.StartController(props: {
 
 
         for i: string, influenceOutput in InfluenceManager:GetAllFromObject("Control", tostring(ControlID)) do
-            local InputkeyInfo = InfluenceManager.DesectKey(i)
+            local InputkeyInfo = InfluenceManager.DissectKey(i)
 
             local value = GetValueFromKey(peek(influenceOutput), peek(control[InputkeyInfo.propertyName]))
 			
@@ -91,8 +96,8 @@ function module.StartController(props: {
 
 
         for i: string, influenceOutput in InfluenceManager:GetAllFromObject("Control", tostring(ControlID)) do
-            local InputkeyInfo = InfluenceManager.DesectKey(i)
-            local OutputkeyInfo = InfluenceManager.DesectKey(peek(influenceOutput))
+            local InputkeyInfo = InfluenceManager.DissectKey(i)
+            local OutputkeyInfo = InfluenceManager.DissectKey(peek(influenceOutput))
 
             local value = control[InputkeyInfo.propertyName]
             local observer = scope:Observer(value)
