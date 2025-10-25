@@ -120,7 +120,7 @@ function module.Init(props: {
                 Activated = function()
                     --TODO: Make this open the controller setup quiz.
                 end
-            }
+            },
         }
     }
 

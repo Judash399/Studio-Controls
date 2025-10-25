@@ -1,6 +1,7 @@
 local Fusion = require(script.Parent.Parent.Parent.Packages.fusion)
 local Settings = require(script.Parent.Parent.Parent.Utils.Settings)
 local MoveHandles = require(script.Parent.Parent.ControllerUtils.MoveHandles)
+local ControllerTheme = require(script.Parent.Parent.ControllerTheme)
 
 local peek = Fusion.peek
 
@@ -35,6 +36,8 @@ return function(scope: Fusion.Scope<any>)
             })
         end
 
+        local colors = peek(ControllerTheme.contextual:now())
+
         scope:Hydrate(meshpart) {
             Material = Enum.Material.Neon,
             Transparency = Settings.ControlTrans,
@@ -42,6 +45,7 @@ return function(scope: Fusion.Scope<any>)
             Archivable = true,
             Locked = true,
             CastShadow = false,
+            Color = colors[peek(data.Color)],
             Parent = workspace.CurrentCamera,
             CFrame = scope:Computed(function(use, scope)
                 return use(data.Position) * props.instanceCFrame
