@@ -2,21 +2,25 @@
   font-weight: 900;
   text-transform: capitalize;
   text-align: left;
-  font-size: 2.6rem;
-  margin-bottom: 1rem;
+  font-size: 3rem;
+  margin-bottom: 0%;
 }
 .md-content .landing-paragraph {
-  text-align: left;
-  font-weight: 600;
   font-size: 1rem;
 }
 
-.landing-page-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: left;
-  padding: 0 1rem;
-  box-sizing: border-box;
-  gap: .5rem;
+.md-content h1 {
+  font-weight: 400;
+}
+
+.md-content h2 {
+  font-weight: 400;
+}
+
+.md-search__input {
+  font-weight: 400;
+}
+
+.md-ellipsis {
+  font-weight: bolder;
 }

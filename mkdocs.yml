@@ -1,19 +1,25 @@
 site_name: Studio Controls
 theme:
   name: material
+  logo: docsAssets/DarkLogo.png
+  favicon: docsAssets/DarkLogo.png
+  icon:
+    previous: fontawesome/solid/angle-left
+    next: fontawesome/solid/angle-right
+    search: fontawesome/solid/search
   palette:
   - scheme: default   # Light mode
-    primary: green
-    accent: light green
+    primary: custom
+    accent: custom
     toggle:
-      icon: material/weather-night
-      name: Switch to dark mode
+      icon: fontawesome/solid/sun
+      name: Switch To dark mode
 
   - scheme: slate     # Dark mode
-    primary: green
-    accent: deep orange
+    primary: custom
+    accent: custom
     toggle:
-      icon: material/weather-sunny
+      icon: fontawesome/solid/moon
       name: Switch to light mode
 
   features:
@@ -39,6 +45,7 @@ markdown_extensions:
 
 extra_css:
   - docsAssets/style.css
+  - docsAssets/colors.css
 
 nav:
   - Home: index.md
