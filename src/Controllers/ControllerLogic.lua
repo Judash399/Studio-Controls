@@ -62,14 +62,20 @@ function module.StartController(props: {
             local keyInfo = InfluenceManager.DissectKey(key)
 
             if keyInfo.ObjectType == "Attribute" then
-				local value = props.selection:GetAttribute(keyInfo.propertyName)
+                
+				local value = scope:Value(props.selection:GetAttribute(keyInfo.propertyName))
 				
-				if value == nil then
+				if peek(value) == nil then
 					props.selection:SetAttribute(keyInfo.propertyName, defaultvalue)
-					return defaultvalue
-				end
-				
-				return value
+                    value:set(defaultvalue)
+					return value
+				else
+                    table.insert(scope, props.selection:GetAttributeChangedSignal(keyInfo.propertyName):Connect(function()
+                        value:set(props.selection:GetAttribute(keyInfo.propertyName))
+                    end))
+
+                    return value
+                end
             else
                 error("Influence ObjectType of '" .. keyInfo.ObjectType .. "' is not currently supported!")
             end
@@ -82,7 +88,7 @@ function module.StartController(props: {
             local value = GetValueFromKey(peek(influenceOutput), peek(control[InputkeyInfo.propertyName]))
 			
 			if value then
-				control[InputkeyInfo.propertyName]:set(value)
+				control[InputkeyInfo.propertyName] = value
 			end
         end
 
@@ -103,7 +109,7 @@ function module.StartController(props: {
             local observer = scope:Observer(value)
 
             if OutputkeyInfo.ObjectType == "Attribute" then
-                observer:onBind(function()
+                observer:onChange(function()
                     props.selection:SetAttribute(OutputkeyInfo.propertyName, peek(value))
                 end)
             end
