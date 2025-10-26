@@ -11,6 +11,7 @@ theme:
   - scheme: default   # Light mode
     primary: custom
     accent: custom
+    
     toggle:
       icon: fontawesome/solid/sun
       name: Switch To dark mode
@@ -40,6 +41,8 @@ theme:
   font:
     text: Roboto
     code: Roboto Mono
+
+
 markdown_extensions:
   - attr_list
 

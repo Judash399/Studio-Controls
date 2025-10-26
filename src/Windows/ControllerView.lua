@@ -4,6 +4,7 @@ local RootFolder = script.Parent.Parent
 local Fusion = require(RootFolder.Packages.fusion)
 local PluginEssentials = require(RootFolder.Packages.pluginessentials)
 local CustomComponents = require(RootFolder.Components.CustomComponents)
+local CreateIfMissing = require(RootFolder.Utils.CreateIfMissing)
 
 local SettingsView = require(script.Parent.SettingsView)
 
@@ -27,8 +28,9 @@ function module.Init(props: {
 	local Button = require(PluginEssentials.StudioComponents.Button)(scope)
 	local IconButton = require(PluginEssentials.StudioComponents.IconButton)(scope)
 	local TextInput = require(PluginEssentials.StudioComponents.TextInput)(scope)
+
+    --Custom Commponents
     local Menu = CustomComponents.Menu(scope)
-	local ControllerListItem = CustomComponents.ControllerListItem(scope)
 
     local widgetEnabled = scope:Value(false)
 
@@ -41,7 +43,7 @@ function module.Init(props: {
 
 		Name = "Controllers",
 		ToolTip = "Opens a List of all created controllers in this place",
-		Image = "rbxassetid://86927978311039",
+		Image = "rbxassetid://105508881549030",
 		
 		[OnEvent "Click"] = function()
 			widgetEnabled:set(not peek(widgetEnabled))
@@ -68,6 +70,19 @@ function module.Init(props: {
         }
 	}
 
+
+    --Controller List logic.
+    local ControllerListFolder = game.ServerStorage.StudioControlsPlugin.ObjectControllers:: Folder
+
+    local ControllerList = scope:Value(ControllerListFolder:GetChildren()):: Fusion.Value<Fusion.Scope<any>, {Instance}>
+
+    local function UpdateControllerList()
+        ControllerList:set(ControllerListFolder:GetChildren())
+    end
+
+    table.insert(scope, ControllerListFolder.ChildAdded:Connect(UpdateControllerList))
+    table.insert(scope, ControllerListFolder.ChildRemoved:Connect(UpdateControllerList))
+
     local ControllerMenu = Menu {
         Parent = controllersWidget,
         TopbarContent = {
@@ -81,9 +96,7 @@ function module.Init(props: {
                 end,
 
                 [Children] = {
-                    scope:New "UIAspectRatioConstraint" {
-
-                    }
+                    scope:New "UIAspectRatioConstraint" {}
                 }
 			},
 					
@@ -121,6 +134,16 @@ function module.Init(props: {
                     --TODO: Make this open the controller setup quiz.
                 end
             },
+
+            scope:ForValues(ControllerList, function(use, scope, object: Instance)
+                return CustomComponents.ControllerListItem(scope) {
+                    Text = object.Name,
+                    Icon = object.ClassName,
+                    OnClicked = function()
+                        --TODO: add menu to let you modify the object. (Delete, Copy, Edit)
+                    end
+                }
+            end)
         }
     }
 

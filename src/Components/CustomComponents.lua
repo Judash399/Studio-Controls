@@ -10,9 +10,46 @@ local components = {}
 
 function components.ControllerListItem(scope: Fusion.Scope<any>)
     return function (props: {
-
+        Text: Fusion.UsedAs<string>,
+        Icon: Fusion.UsedAs<string>,
+        OnClicked: () -> ()
     })
-        
+        local scope = scope:innerScope({})
+
+        local ButtonComponent = require(PluginEssentials.StudioComponents.Button)(scope)
+        local LabelComponent = require(PluginEssentials.StudioComponents.Label)(scope)
+
+        return ButtonComponent {
+            Text = "",
+            Size = UDim2.new(1, 0, 0, 23),
+
+            [OnEvent "Activated"] = props.OnClicked,
+
+            [Children] = {
+                scope:New "UIPadding" {
+                    PaddingBottom = UDim.new(0, 2),
+                    PaddingTop = UDim.new(0, 2),
+                    PaddingLeft = UDim.new(0, 5),
+                    PaddingRight = UDim.new(0, 5)
+				},
+                scope:New "UIListLayout" {
+                    FillDirection = Enum.FillDirection.Horizontal,
+                    Padding = UDim.new(0, 5),
+                },
+                LabelComponent {
+                    Text = props.Text,
+                    Size = UDim2.new(1, 0, 1, 0),
+                    TextXAlignment = Enum.TextXAlignment.Left,
+                    ZIndex = 1,
+
+                    [Children] = {
+                         scope:New "UIFlexItem" {
+					        FlexMode = Enum.UIFlexMode.Fill
+				        },
+                    }
+                }
+            }
+        }
     end
 end
 

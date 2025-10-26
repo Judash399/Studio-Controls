@@ -24,7 +24,7 @@ local ToolbarComponent = require(PluginEssentials.PluginComponents.Toolbar)(Root
 --Refrences
 local RootFolder = script.Parent
 
-local StudioControlsFolder = CreateIfMissing(game.ServerStorage, "StudioControls", "Folder")
+local StudioControlsFolder = CreateIfMissing(game.ServerStorage, "StudioControlsPlugin", "Folder")
 local ObjectControllerFolder = CreateIfMissing(StudioControlsFolder, "ObjectControllers", "Folder")
 
 local newToolbar = ToolbarComponent {
