@@ -3,13 +3,23 @@
 registry = "test"
 
 [[package]]
-name = "judash399/studio-controls"
-version = "0.1.0"
-dependencies = [["fusion", "realdeedy/fusion@0.3.0"], ["pluginessentials", "tenebrisnoctua/pluginessentials@1.5.0"]]
+name = "elttob/fusion"
+version = "0.3.0"
+dependencies = []
 
 [[package]]
-name = "realdeedy/fusion"
-version = "0.3.0"
+name = "judash399/innercomponents"
+version = "0.1.0"
+dependencies = [["fusion", "elttob/fusion@0.3.0"], ["lucide-icons", "latte-soft/lucide-icons@0.1.3"]]
+
+[[package]]
+name = "judash399/studio-controls"
+version = "0.1.0"
+dependencies = [["fusion", "elttob/fusion@0.3.0"], ["innercomponents", "judash399/innercomponents@0.1.0"], ["pluginessentials", "tenebrisnoctua/pluginessentials@1.5.0"]]
+
+[[package]]
+name = "latte-soft/lucide-icons"
+version = "0.1.3"
 dependencies = []
 
 [[package]]
