@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="250mm"
+   height="250mm"
+   viewBox="0 0 250 250"
+   version="1.1"
+   id="svg1"
+   xml:space="preserve"
+   inkscape:export-filename="Icon.png"
+   inkscape:export-xdpi="25.4"
+   inkscape:export-ydpi="25.4"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   sodipodi:docname="Icon.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.57237304"
+     inkscape:cx="905.00419"
+     inkscape:cy="449.88143"
+     inkscape:window-width="2560"
+     inkscape:window-height="1529"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" /><defs
+     id="defs1"><rect
+       x="929.46375"
+       y="78.620056"
+       width="1202.0133"
+       height="1006.3367"
+       id="rect1" /><rect
+       x="955.67041"
+       y="85.608505"
+       width="1406.4254"
+       height="805.41876"
+       id="rect2" /><style
+       id="style1">
+      .cls-1 {
+        fill: none;
+      }
+    </style></defs><g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"><g
+       style="font-weight:bold;font-size:93.2117px;line-height:1;font-family:Lexand;-inkscape-font-specification:'Lexand Bold';letter-spacing:-1.26204px;text-orientation:upright;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;paint-order:markers stroke fill"
+       id="g2"
+       transform="matrix(9.9385614,0,0,9.9385614,5.1011985,4.5834822)"><path
+         d="m 14.748,10.5 7,5 -3,1 -2,3 z"
+         id="path1-0"
+         style="stroke:#ffffff;stroke-opacity:1" /><path
+         d="M 21,10 V 8 A 2,2 0 0 0 20,6.27 l -7,-4 a 2,2 0 0 0 -2,0 l -7,4 A 2,2 0 0 0 3,8 v 8 a 2,2 0 0 0 1,1.73 l 7,4 a 2,2 0 0 0 2.305,-0.23"
+         id="path2-9"
+         style="stroke:#ffffff;stroke-opacity:1" /></g></g></svg>
